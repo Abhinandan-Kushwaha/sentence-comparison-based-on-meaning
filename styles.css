@@ -1,0 +1,53 @@
+.bdy {
+  background-color: azure;
+}
+.header {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  font-size: 24px;
+  color: steelblue;
+}
+.container {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+.label {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+}
+.imageContainer {
+  height: 500px;
+  margin-top: 20px;
+}
+.btncntnr {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+.btn {
+  background-color: aliceblue;
+  padding: 10px;
+}
+.btn:hover {
+  background-color: aquamarine;
+  padding: 10px;
+}
+.extract {
+  width: 130px;
+  align-self: center;
+  padding: 6px;
+  margin: 20px;
+}
+.result {
+  font-size: 30px;
+  font-weight: bold;
+}
+.txtar {
+  font-size: 20px;
+  height: 200px;
+}
+.txtout {
+  font-size: 20px;
+}

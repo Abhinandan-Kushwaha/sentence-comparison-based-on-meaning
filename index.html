@@ -1,77 +1,12 @@
 <html>
     <head>
-        <style>
-            .btncntnr{
-                display: flex;
-                justify-content: center;
-                margin-top: 40px;
-            }
-            .btn{
-                background-color: aliceblue;
-                padding: 10px;
-            }
-            .btn:hover {
-                background-color: aquamarine;
-                padding: 10px;
-            }
-            .extract{
-                width: 130px;
-                align-self: center;
-                padding: 6px;
-                margin: 20px;
-            }
-            .txtar{
-                font-size: 20px;
-                height: 200px;
-            }
-            .txtout{
-                font-size: 20px;
-            }
-        </style>
+        <link rel="stylesheet" href="./styles.css">
+        <script type="text/javascript" src="./extract.js"></script>
+        <script type="text/javascript" src="./similarity.js"></script>
         <script>
 
             function fn(){
                 document.getElementById('comp').style.display = 'none';
-            }
-
-            function similarity(s1, s2) {
-                var longer = s1;
-                var shorter = s2;
-                if (s1.length < s2.length) {
-                    longer = s2;
-                    shorter = s1;
-                }
-                var longerLength = longer.length;
-                if (longerLength == 0) {
-                    return 1.0;
-                }
-                return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
-            }
-            function editDistance(s1, s2) {
-                s1 = s1.toLowerCase();
-                s2 = s2.toLowerCase();
-
-                var costs = new Array();
-                for (var i = 0; i <= s1.length; i++) {
-                    var lastValue = i;
-                    for (var j = 0; j <= s2.length; j++) {
-                    if (i == 0)
-                        costs[j] = j;
-                    else {
-                        if (j > 0) {
-                        var newValue = costs[j - 1];
-                        if (s1.charAt(i - 1) != s2.charAt(j - 1))
-                            newValue = Math.min(Math.min(newValue, lastValue),
-                            costs[j]) + 1;
-                        costs[j - 1] = lastValue;
-                        lastValue = newValue;
-                        }
-                    }
-                    }
-                    if (i > 0)
-                    costs[s2.length] = lastValue;
-                }
-                return costs[s2.length];
             }
 
             function e1(){
@@ -159,278 +94,21 @@
 
                 document.getElementById("r").innerHTML = "Similarity  =  " + (avgSimilarity*100) + "%"
             }
-
-            function extract(text){
-                if(!text) return ''
-                let punctuations =['!','@','#','$','%','^','&','+','-','*','_','=','(',')',"'",'"','.',',','<','>',':',';','?','/','\\']
-                text = text.trim().split('').filter(character => !punctuations.includes(character)).join('')
-                let words = text.toLowerCase().split(' ')
-
-                let tokens=[]
-                words.forEach(word=>{
-                    if(word && word.trim() && word.trim().length){
-                        tokens.push(word.trim())
-                    }
-                })
-
-
-                // console.log('tokens '+tokens+'.')
-
-                let articles = ['a','an','the']
-                let conjunctions = [
-                    'and',
-                    'for',
-                    'nor',
-                    'but',
-                    'or',
-                    'yet',
-                    'so',
-                    'after',
-                    'although',
-                    'as',
-                    'as if',
-                    'as long as',
-                    'as much as',
-                    'as soon as',
-                    'as though',
-                    'because',
-                    'before',
-                    'by the time',
-                    'even if',
-                    'if',
-                    'in case',
-                    'lest',
-                    'once',
-                    'only if',
-                    'since',
-                    'so that',
-                    'than',
-                    'that',
-                    'though',
-                    'till',
-                    'unless',
-                    'until',
-                    'when',
-                    'whenever',
-                    'where',
-                    'wherever',
-                    'while',
-                    'until',
-                    'both',
-                    'either',
-                    'neither',
-                    'but only',
-                    'whether']
-                let prepositions = [
-                    "a",
-                    "abaft",
-                    "aboard",
-                    "about",
-                    "above",
-                    "absent",
-                    "across",
-                    "afore",
-                    "after",
-                    "against",
-                    "along",
-                    "alongside",
-                    "amid",
-                    "amidst",
-                    "among",
-                    "amongst",
-                    "an",
-                    "anenst",
-                    "apropos",
-                    "apud",
-                    "around",
-                    "as",
-                    "aside",
-                    "astride",
-                    "at",
-                    "athwart",
-                    "atop",
-                    "barring",
-                    "before",
-                    "behind",
-                    "below",
-                    "beneath",
-                    "beside",
-                    "besides",
-                    "between",
-                    "beyond",
-                    "but",
-                    "by",
-                    "circa",
-                    "concerning",
-                    "despite",
-                    "down",
-                    "during",
-                    "except",
-                    "excluding",
-                    "failing",
-                    "following",
-                    "for",
-                    "forenenst",
-                    "from",
-                    "given",
-                    "in",
-                    "including",
-                    "inside",
-                    "into",
-                    "lest",
-                    "like",
-                    "mid",
-                    "midst",
-                    "minus",
-                    "modulo",
-                    "near",
-                    "next",
-                    "notwithstanding",
-                    "of",
-                    "off",
-                    "on",
-                    "onto",
-                    "opposite",
-                    "out",
-                    "outside",
-                    "over",
-                    "pace",
-                    "past",
-                    "per",
-                    "plus",
-                    "pro",
-                    "qua",
-                    "regarding",
-                    "round",
-                    "sans",
-                    "save",
-                    "since",
-                    "than",
-                    "the",
-                    "through",
-                    "throughout",
-                    "till",
-                    "times",
-                    "to",
-                    "toward",
-                    "towards",
-                    "under",
-                    "underneath",
-                    "unlike",
-                    "until",
-                    "unto",
-                    "up",
-                    "upon",
-                    "via",
-                    "vice",
-                    "with",
-                    "within",
-                    "without"
-                ]
-
-                let auxiliaryVerbs =[
-                    'do',
-                    'does',
-                    'did',
-                    'has',
-                    'have',
-                    'had',
-                    'is',
-                    'am',
-                    'are',
-                    'was',
-                    'were',
-                    'be',
-                    'being',
-                    'been',
-                    'may',
-                    'must',
-                    'might',
-                    'should',
-                    'could',
-                    'would',
-                    'shall',
-                    'will',
-                    'can'
-                ]
-                
-                // let pronouns = [
-                //     'I',
-                //     'you',
-                //     'my',
-                //     'mine',
-                //     'myself',
-                //     'we',
-                //     'us',
-                //     'our',
-                //     'ours',
-                //     'ourselves',
-                //     'you',
-                //     'you',
-                //     'your',
-                //     'yours',
-                //     'yourself',
-                //     'you',
-                //     'you',
-                //     'your',
-                //     'your',
-                //     'yourselves',
-                //     'he',
-                //     'him',
-                //     'his',
-                //     'his',
-                //     'himself',
-                //     'she',
-                //     'her',
-                //     'her',
-                //     'her',
-                //     'herself',
-                //     'it',
-                //     'it',
-                //     'its',
-                //     'itself',
-                //     'they',
-                //     'them',
-                //     'their',
-                //     'theirs',
-                //     'themself',
-                //     'they',
-                //     'them',
-                //     'their',
-                //     'theirs',
-                //     'themselves'
-                // ]
-
-                let filteredTokens = tokens.filter(tokenItem => !(
-                    articles.includes(tokenItem) ||
-                    conjunctions.includes(tokenItem) ||
-                    prepositions.includes(tokenItem) ||
-                    auxiliaryVerbs.includes(tokenItem)
-                    ))
-
-                // console.log('filteredTokens -> ',filteredTokens)
-
-                // let sorted = filteredTokens.sort()
-
-                // console.log('sorted -> ',sorted)
-                
-                return filteredTokens.join(' ')
-            }
         </script>
     </head>
 
-    <body style="background-color: azure;" onload="fn()">
-        <div class="btncntnr" style="margin-top: 20px;margin-bottom: 40px; font-size: 24px; color: steelblue;">
+    <body class="bdy" onload="fn()">
+        <div class="btncntnr header">
             <h3>This website compares two sentences and displays the percentage of similarity between them</h2>
         </div>
-        <div style="display: flex; width:100%; justify-content: space-evenly;">
-            <div style="width: 45%; display: flex; flex-direction: column;">
+        <div class="container">
+            <div class="label">
                 Enter Sentence 1
                 <textarea class="txtar" id="i1"></textarea>
                 <button class="extract" onclick="e1()">Extract Tokens</button>
                 <div class="txtout" id="t1"></div>
             </div>
-            <div style="width: 45%; display: flex; flex-direction: column;">
+            <div class="label">
                 Enter Sentence 2
                 <textarea class="txtar" id="i2"></textarea>
                 <button class="extract" onclick="e2()">Extract Tokens</button>
@@ -440,14 +118,14 @@
         <div class="btncntnr">
             <button class="btn" id="comp" onclick="compare()">Compare</button>
         </div>
-        <div class="btncntnr" style="font-size: 30px; font-weight: bold;" id="r"></div>
+        <div class="btncntnr result" id="r"></div>
 
 
         <div style="margin: 10px">
             <h2>How it works</h2>
             <h3>1. Tokenizing and Text pre-processing</h3>
         </div>
-        <img src="./sentencePreProcessing.png" style="height:500px; margin-top: 20px;"/>
+        <img src="./sentencePreProcessing.png" class="imageContainer"/>
         <div style="margin-bottom: 10px;">
             <h3>2. Comparing for similarity based on Levenshtein distance</h3>
             <p>
