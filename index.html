@@ -331,8 +331,8 @@
         </script>
     </head>
 
-    <body onload="fn()">
-        <div class="btncntnr">
+    <body style="background-color: azure;" onload="fn()">
+        <div class="btncntnr" style="margin-top: 20px;margin-bottom: 40px; font-size: 24px; color: steelblue;">
             This website compares two sentences and displays "Same" if their meaning is similar, else it displays "Different"
         </div>
         <div style="display: flex; width:100%; justify-content: space-evenly;">
@@ -353,5 +353,9 @@
             <button class="btn" id="comp" onclick="compare()">Compare</button>
         </div>
         <div class="btncntnr" style="font-size: 30px; font-weight: bold;" id="r"></div>
+        <div class="btncntnr" style="margin-bottom: 10px;">How it works</div>
+        <div class="btncntnr">
+            <img src="./comparatorFlowChart.png" style="height:500px; margin-top: 20px;"/>
+        </div>
     </body>
 </html>
