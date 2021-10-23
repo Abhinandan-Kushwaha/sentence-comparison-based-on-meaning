@@ -110,9 +110,54 @@
                 let s1 = document.getElementById('t1').innerHTML
                 let s2 = document.getElementById('t2').innerHTML
 
-                let res = ""
+                if(s1.length < s2.length){  // Make s1 the bigger string
+                    temp = s1
+                    s1 = s2
+                    s2 = temp
+                }
 
-                document.getElementById("r").innerHTML = "Similarity  =  " + similarity(s1,s2)*100 + "%"
+                let w1 = s1.split(' ')
+                let w2 = s2.split(' ')
+
+                let l1 = w1.length
+                let l2 = w2.length
+
+                let maxL = l1
+                let minL = l2
+
+                let word1,word2;
+                let maxSim=0,sum=0;
+
+                let similarities = []
+
+                for(let i=0;i<maxL;i++){
+                    word1 = w1[i]
+                    similarities[i]=[]
+                    for(j=0;j<minL;j++){
+                        word2 = w2[j]
+                        similarities[i][j] = similarity(word1,word2)
+                        // console.log(`similarities[${i}][${j}] -> `,similarity(word1,word2))
+                    }
+                }
+
+                console.log('similarities -> ',similarities)
+
+                for(let i=0;i<maxL;i++){
+                    maxSim=0;
+                    for(j=0;j<minL;j++){
+                        if(similarities[i][j] > maxSim){
+                            maxSim = similarities[i][j]
+                        }
+                    }
+                    console.log(`maxValue for ${w1[i]} = `, maxSim)
+
+                    sum += maxSim
+                }
+                console.log('totalSimilarity -->',sum)
+                let avgSimilarity = sum/maxL
+                console.log('avgSimilarity -->',avgSimilarity)
+
+                document.getElementById("r").innerHTML = "Similarity  =  " + (avgSimilarity*100) + "%"
             }
 
             function extract(text){
