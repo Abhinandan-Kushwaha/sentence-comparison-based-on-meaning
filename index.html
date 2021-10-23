@@ -1,0 +1,357 @@
+<html>
+    <head>
+        <style>
+            .btncntnr{
+                display: flex;
+                justify-content: center;
+                margin-top: 40px;
+            }
+            .btn{
+                background-color: aliceblue;
+                padding: 10px;
+            }
+            .btn:hover {
+                background-color: aquamarine;
+                padding: 10px;
+            }
+            .extract{
+                width: 120px;
+                align-self: center;
+                padding: 6px;
+                margin: 20px;
+            }
+            .txtar{
+                font-size: 20px;
+                height: 200px;
+            }
+            .txtout{
+                font-size: 20px;
+            }
+        </style>
+        <script>
+
+            function fn(){
+                document.getElementById('comp').style.display = 'none';
+            }
+
+            function e1(){
+                let str = extract(document.getElementById('i1').value)
+                document.getElementById('t1').innerHTML = str
+
+                document.getElementById("r").innerHTML = ""
+
+                if(str && document.getElementById('t2').innerHTML){
+                    console.log('inside if')
+                    document.getElementById('comp').style.display = 'block';
+                }
+                else{
+                    console.log('inside else')
+                    document.getElementById('comp').style.display = 'none';
+                }
+            }
+
+            function e2(){
+                let str = extract(document.getElementById('i2').value)
+                document.getElementById('t2').innerHTML = str
+
+                document.getElementById("r").innerHTML = ""
+
+                if(str && document.getElementById('t1').innerHTML){
+                    console.log('inside if')
+                    document.getElementById('comp').style.display = 'block';
+                }
+                else{
+                    console.log('inside else')
+                    document.getElementById('comp').style.display = 'none';
+                }
+            }
+
+            function compare(){
+                let s1 = document.getElementById('t1').value
+                let s2 = document.getElementById('t2').value
+
+                let res = ""
+
+                if(s1 === s2){
+                    res = "Same"
+                }
+                else{
+                    res = "Different"
+                }
+
+                document.getElementById("r").innerHTML = res
+            }
+
+            function extract(text){
+                let punctuations =['!','@','#','$','%','^','&','+','-','*','_','=','(',')',"'",'"','.',',','<','>',':',';','?','/','\\']
+                text = text.split('').filter(character => !punctuations.includes(character)).join('')
+                let tokens = text.toLowerCase().split(' ')
+
+                let articles = ['a','an','the']
+                let conjunctions = [
+                    'and',
+                    'for',
+                    'nor',
+                    'but',
+                    'or',
+                    'yet',
+                    'so',
+                    'after',
+                    'although',
+                    'as',
+                    'as if',
+                    'as long as',
+                    'as much as',
+                    'as soon as',
+                    'as though',
+                    'because',
+                    'before',
+                    'by the time',
+                    'even if',
+                    'if',
+                    'in case',
+                    'lest',
+                    'once',
+                    'only if',
+                    'since',
+                    'so that',
+                    'than',
+                    'that',
+                    'though',
+                    'till',
+                    'unless',
+                    'until',
+                    'when',
+                    'whenever',
+                    'where',
+                    'wherever',
+                    'while',
+                    'until',
+                    'both',
+                    'either',
+                    'neither',
+                    'but only',
+                    'whether']
+                let prepositions = [
+                    "a",
+                    "abaft",
+                    "aboard",
+                    "about",
+                    "above",
+                    "absent",
+                    "across",
+                    "afore",
+                    "after",
+                    "against",
+                    "along",
+                    "alongside",
+                    "amid",
+                    "amidst",
+                    "among",
+                    "amongst",
+                    "an",
+                    "anenst",
+                    "apropos",
+                    "apud",
+                    "around",
+                    "as",
+                    "aside",
+                    "astride",
+                    "at",
+                    "athwart",
+                    "atop",
+                    "barring",
+                    "before",
+                    "behind",
+                    "below",
+                    "beneath",
+                    "beside",
+                    "besides",
+                    "between",
+                    "beyond",
+                    "but",
+                    "by",
+                    "circa",
+                    "concerning",
+                    "despite",
+                    "down",
+                    "during",
+                    "except",
+                    "excluding",
+                    "failing",
+                    "following",
+                    "for",
+                    "forenenst",
+                    "from",
+                    "given",
+                    "in",
+                    "including",
+                    "inside",
+                    "into",
+                    "lest",
+                    "like",
+                    "mid",
+                    "midst",
+                    "minus",
+                    "modulo",
+                    "near",
+                    "next",
+                    "notwithstanding",
+                    "of",
+                    "off",
+                    "on",
+                    "onto",
+                    "opposite",
+                    "out",
+                    "outside",
+                    "over",
+                    "pace",
+                    "past",
+                    "per",
+                    "plus",
+                    "pro",
+                    "qua",
+                    "regarding",
+                    "round",
+                    "sans",
+                    "save",
+                    "since",
+                    "than",
+                    "the",
+                    "through",
+                    "throughout",
+                    "till",
+                    "times",
+                    "to",
+                    "toward",
+                    "towards",
+                    "under",
+                    "underneath",
+                    "unlike",
+                    "until",
+                    "unto",
+                    "up",
+                    "upon",
+                    "via",
+                    "vice",
+                    "with",
+                    "within",
+                    "without"
+                ]
+
+                let auxiliaryVerbs =[
+                    'do',
+                    'does',
+                    'did',
+                    'has',
+                    'have',
+                    'had',
+                    'is',
+                    'am',
+                    'are',
+                    'was',
+                    'were',
+                    'be',
+                    'being',
+                    'been',
+                    'may',
+                    'must',
+                    'might',
+                    'should',
+                    'could',
+                    'would',
+                    'shall',
+                    'will',
+                    'can'
+                ]
+                
+                let pronouns = [
+                    'I',
+                    'you',
+                    'my',
+                    'mine',
+                    'myself',
+                    'we',
+                    'us',
+                    'our',
+                    'ours',
+                    'ourselves',
+                    'you',
+                    'you',
+                    'your',
+                    'yours',
+                    'yourself',
+                    'you',
+                    'you',
+                    'your',
+                    'your',
+                    'yourselves',
+                    'he',
+                    'him',
+                    'his',
+                    'his',
+                    'himself',
+                    'she',
+                    'her',
+                    'her',
+                    'her',
+                    'herself',
+                    'it',
+                    'it',
+                    'its',
+                    'itself',
+                    'they',
+                    'them',
+                    'their',
+                    'theirs',
+                    'themself',
+                    'they',
+                    'them',
+                    'their',
+                    'theirs',
+                    'themselves'
+                ]
+
+                let filteredTokens = tokens.filter(tokenItem => !(
+                    articles.includes(tokenItem) ||
+                    conjunctions.includes(tokenItem) ||
+                    prepositions.includes(tokenItem) ||
+                    auxiliaryVerbs.includes(tokenItem) ||
+                    pronouns.includes(tokenItem)
+                    ))
+
+                // console.log('filteredTokens -> ',filteredTokens)
+
+                let sorted = filteredTokens.sort()
+
+                // console.log('sorted -> ',sorted)
+                
+                return sorted.join(' ')
+            }
+        </script>
+    </head>
+
+    <body onload="fn()">
+        <div class="btncntnr">
+            This website compares two sentences and displays "Same" if their meaning is similar, else it displays "Different"
+        </div>
+        <div style="display: flex; width:100%; justify-content: space-evenly;">
+            <div style="width: 45%; display: flex; flex-direction: column;">
+                Enter Sentence 1
+                <textarea class="txtar" id="i1"></textarea>
+                <button class="extract" onclick="e1()">Get Extract</button>
+                <div class="txtout" id="t1"></div>
+            </div>
+            <div style="width: 45%; display: flex; flex-direction: column;">
+                Enter Sentence 2
+                <textarea class="txtar" id="i2"></textarea>
+                <button class="extract" onclick="e2()">Get Extract</button>
+                <div class="txtout" id="t2"></div>
+            </div>
+        </div>
+        <div class="btncntnr">
+            <button class="btn" id="comp" onclick="compare()">Compare</button>
+        </div>
+        <div class="btncntnr" style="font-size: 30px; font-weight: bold;" id="r"></div>
+    </body>
+</html>
