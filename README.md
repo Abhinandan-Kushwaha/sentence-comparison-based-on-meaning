@@ -1,5 +1,4 @@
-This website compares two sentences and displays "Same" if their meaning is similar, else it displays "Different"
-
+Compares two sentences based on their meaning using Javascript
 ## How It works
 
 ### 1. Tokenizing and Text pre-processing
