@@ -354,59 +354,58 @@
                     'can'
                 ]
                 
-                let pronouns = [
-                    'I',
-                    'you',
-                    'my',
-                    'mine',
-                    'myself',
-                    'we',
-                    'us',
-                    'our',
-                    'ours',
-                    'ourselves',
-                    'you',
-                    'you',
-                    'your',
-                    'yours',
-                    'yourself',
-                    'you',
-                    'you',
-                    'your',
-                    'your',
-                    'yourselves',
-                    'he',
-                    'him',
-                    'his',
-                    'his',
-                    'himself',
-                    'she',
-                    'her',
-                    'her',
-                    'her',
-                    'herself',
-                    'it',
-                    'it',
-                    'its',
-                    'itself',
-                    'they',
-                    'them',
-                    'their',
-                    'theirs',
-                    'themself',
-                    'they',
-                    'them',
-                    'their',
-                    'theirs',
-                    'themselves'
-                ]
+                // let pronouns = [
+                //     'I',
+                //     'you',
+                //     'my',
+                //     'mine',
+                //     'myself',
+                //     'we',
+                //     'us',
+                //     'our',
+                //     'ours',
+                //     'ourselves',
+                //     'you',
+                //     'you',
+                //     'your',
+                //     'yours',
+                //     'yourself',
+                //     'you',
+                //     'you',
+                //     'your',
+                //     'your',
+                //     'yourselves',
+                //     'he',
+                //     'him',
+                //     'his',
+                //     'his',
+                //     'himself',
+                //     'she',
+                //     'her',
+                //     'her',
+                //     'her',
+                //     'herself',
+                //     'it',
+                //     'it',
+                //     'its',
+                //     'itself',
+                //     'they',
+                //     'them',
+                //     'their',
+                //     'theirs',
+                //     'themself',
+                //     'they',
+                //     'them',
+                //     'their',
+                //     'theirs',
+                //     'themselves'
+                // ]
 
                 let filteredTokens = tokens.filter(tokenItem => !(
                     articles.includes(tokenItem) ||
                     conjunctions.includes(tokenItem) ||
                     prepositions.includes(tokenItem) ||
-                    auxiliaryVerbs.includes(tokenItem) ||
-                    pronouns.includes(tokenItem)
+                    auxiliaryVerbs.includes(tokenItem)
                     ))
 
                 // console.log('filteredTokens -> ',filteredTokens)
