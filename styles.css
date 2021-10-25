@@ -86,3 +86,12 @@ td {
   top: 16px;
   cursor: pointer;
 }
+
+.boldCell {
+  background-color: rgb(219, 249, 255);
+  font-weight: bold;
+}
+
+.sCell {
+  background-color: aquamarine;
+}
