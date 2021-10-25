@@ -3,6 +3,7 @@
         <link rel="stylesheet" href="./styles.css">
         <script type="text/javascript" src="./extract.js"></script>
         <script type="text/javascript" src="./similarity.js"></script>
+        <script type="text/javascript" src="./getMaximumSimilarity.js"></script>
         <script>
 
             function fn(){
@@ -61,7 +62,7 @@
                 let minL = l2
 
                 let word1,word2;
-                let maxSim=0,sum=0;
+                let maxSim=0;
 
                 let similarities = []
 
@@ -76,20 +77,10 @@
                 }
 
                 console.log('similarities -> ',similarities)
+                let totalSimilarity = getMaximumSimilarity(similarities,maxL,minL)
 
-                for(let i=0;i<maxL;i++){
-                    maxSim=0;
-                    for(j=0;j<minL;j++){
-                        if(similarities[i][j] > maxSim){
-                            maxSim = similarities[i][j]
-                        }
-                    }
-                    console.log(`maxValue for ${w1[i]} = `, maxSim)
-
-                    sum += maxSim
-                }
-                console.log('totalSimilarity -->',sum)
-                let avgSimilarity = sum/maxL
+                console.log('totalSimilarity -->',totalSimilarity)
+                let avgSimilarity = totalSimilarity/minL
                 console.log('avgSimilarity -->',avgSimilarity)
 
                 document.getElementById("r").innerHTML = "Similarity  =  " + (avgSimilarity*100) + "%"
