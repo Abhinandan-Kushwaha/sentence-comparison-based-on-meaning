@@ -32,7 +32,14 @@
 }
 .btn:hover {
   background-color: aquamarine;
+}
+
+.btnclose {
+  background-color: rgb(236, 202, 207);
   padding: 10px;
+}
+.btnclose:hover {
+  background-color: lightpink;
 }
 .extract {
   width: 130px;
@@ -50,4 +57,13 @@
 }
 .txtout {
   font-size: 20px;
+}
+
+table {
+  border-collapse: collapse;
+  overflow: scroll;
+}
+td {
+  border: 1px solid black;
+  padding: 10px;
 }

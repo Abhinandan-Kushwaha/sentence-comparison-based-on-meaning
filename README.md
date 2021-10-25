@@ -1,9 +1,10 @@
 Compares two sentences based on their meaning using Javascript
+
 ## How It works
 
 ### 1. Tokenizing and Text pre-processing
 
-<img src='./sentencePreProcessing.png' alt='' width='360px'/>
+<img src='./assets/sentencePreProcessing.png' alt='' width='360px'/>
 
 ### 2. Comparing for similarity based on Levenshtein distance
 

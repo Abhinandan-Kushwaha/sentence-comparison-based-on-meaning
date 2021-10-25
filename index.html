@@ -8,6 +8,8 @@
 
             function fn(){
                 document.getElementById('comp').style.display = 'none';
+                document.getElementById('tableButton').style.display = 'none';
+                document.getElementById('similarityTable').style.display = 'none';
             }
 
             function e1(){
@@ -16,6 +18,8 @@
 
                 document.getElementById("r").innerHTML = ""
 
+                document.getElementById('tableButton').style.display = 'none';
+                document.getElementById('similarityTable').innerHTML = '';
                 if(str && document.getElementById('t2').innerHTML){
                     // console.log('inside if')
                     document.getElementById('comp').style.display = 'block';
@@ -31,7 +35,8 @@
                 document.getElementById('t2').innerHTML = str
 
                 document.getElementById("r").innerHTML = ""
-
+                document.getElementById('tableButton').style.display = 'none';
+                document.getElementById('similarityTable').innerHTML = '';
                 if(str && document.getElementById('t1').innerHTML){
                     // console.log('inside if')
                     document.getElementById('comp').style.display = 'block';
@@ -55,14 +60,10 @@
                 let w1 = s1.split(' ')
                 let w2 = s2.split(' ')
 
-                let l1 = w1.length
-                let l2 = w2.length
-
-                let maxL = l1
-                let minL = l2
+                let maxL = w1.length
+                let minL = w2.length
 
                 let word1,word2;
-                let maxSim=0;
 
                 let similarities = []
 
@@ -77,13 +78,74 @@
                 }
 
                 console.log('similarities -> ',similarities)
-                let totalSimilarity = getMaximumSimilarity(similarities,maxL,minL)
+                let result = getMaximumSimilarity(similarities,maxL,minL)
+                console.log('result - -- >>',result)
+                let totalSimilarity = result.similarity
 
                 console.log('totalSimilarity -->',totalSimilarity)
                 let avgSimilarity = totalSimilarity/minL
                 console.log('avgSimilarity -->',avgSimilarity)
 
-                document.getElementById("r").innerHTML = "Similarity  =  " + (avgSimilarity*100) + "%"
+                let percentSimilarity = avgSimilarity*100
+                percentSimilarity = Math.round(percentSimilarity*100)/100
+
+                document.getElementById("r").innerHTML = "Similarity  =  " + percentSimilarity + "%"
+
+                highlightPositions(similarities,maxL,minL,w1,w2,result.positions)
+                document.getElementById('tableButton').style.display = 'block';
+            }
+
+            function highlightPositions(similarities,rows,cols,w1,w2,positions){
+                console.log('similarities ->',similarities)
+                console.log('rows ->',rows)
+                console.log('cols ->',cols)
+                console.log('positions ->',positions)
+                let table = document.getElementById('similarityTable')
+                table.innerHTML = ''
+
+                let tr = document.createElement('tr')
+                let td = document.createElement('td')
+                td.style.backgroundColor = 'lightgray'
+                tr.appendChild(td)
+                for(let j=0; j<cols; j++){
+                    let td = document.createElement('td')
+                    td.innerHTML = w2[j]
+                    td.style.backgroundColor = '#dbf9ff'
+                    td.style.fontWeight = 'bold'
+                    tr.appendChild(td)
+                }
+                table.appendChild(tr)
+
+                for(let i=0; i<rows; i++){
+                    let tr = document.createElement('tr')
+                    let td = document.createElement('td')
+                    td.innerHTML = w1[i]
+                    td.style.backgroundColor = '#dbf9ff'
+                    td.style.fontWeight = 'bold'
+                    tr.appendChild(td)
+                    for(let j=0; j<cols; j++){
+                        let td = document.createElement('td')
+                        td.innerHTML = Math.round(similarities[i][j]*100)/100
+                        if(positions.some(position => position.row === i && position.col === j)){
+                            td.style.backgroundColor = 'aquamarine'
+                        }
+                        tr.appendChild(td)
+                    }
+                    table.appendChild(tr)
+                }
+
+                table.innerHTML +=
+                `<div class="btncntnr">
+                    <button class="btnclose" onclick="hideTable()">Hide table</button>
+                </div>`
+            }
+
+            function getTable(){
+                document.getElementById('similarityTable').style.display = 'block';
+            }
+
+            function hideTable(){
+                document.getElementById('similarityTable').style.display = 'none';
             }
         </script>
     </head>
@@ -111,12 +173,20 @@
         </div>
         <div class="btncntnr result" id="r"></div>
 
+        <div class="btncntnr">
+            <button class="btn" id="tableButton" onclick="getTable()">Get tokens comparison table</button>
+        </div>
+
+        <div class="btncntnr">
+            <table id="similarityTable">
+            </table>
+        </div>
 
         <div style="margin: 10px">
             <h2>How it works</h2>
             <h3>1. Tokenizing and Text pre-processing</h3>
         </div>
-        <img src="./sentencePreProcessing.png" class="imageContainer"/>
+        <img src="./assets/sentencePreProcessing.png" class="imageContainer"/>
         <div style="margin-bottom: 10px;">
             <h3>2. Comparing for similarity based on Levenshtein distance</h3>
             <p>

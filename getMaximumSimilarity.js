@@ -15,6 +15,7 @@ function getMaximumSimilarity(similarities,rows,cols){
     }
 
     ar.sort((a,b)=> b.val - a.val)
+    let positions = []
 
     for(i=0; i<s; i++){
         if(rowsAlreadyTaken.includes(ar[i].row)) continue
@@ -23,9 +24,16 @@ function getMaximumSimilarity(similarities,rows,cols){
         colsAlreadyTaken.push(ar[i].col)
 
         console.log(`taken value ${ar[i].val} in row ${ar[i].row} and col ${ar[i].col}`)
+        positions.push({
+            row: ar[i].row,
+            col: ar[i].col
+        })
         sum += ar[i].val
     }
 
-    return sum
+    return {
+        similarity: sum,
+        positions
+    }
 
 }
