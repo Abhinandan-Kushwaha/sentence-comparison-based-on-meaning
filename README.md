@@ -1,5 +1,7 @@
 Compares two sentences based on their meaning using Javascript
 
+## <a target="_blank" href='https://abhinandan-kushwaha.github.io/sentence-comparison-based-on-meaning/'>Try it here</a>
+
 ## How It works
 
 ### 1. Tokenizing and Text pre-processing
