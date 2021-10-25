@@ -77,7 +77,7 @@ for each token t1 in s1, do{
 sum = 3.75
 <br/>
 <br/>
-Divide this sum by minLength to get the average similarity
+Divide this sum by maxLength to get the average similarity
 <br/>
 average = 3.75 / 4 = 0.9375<br/>
 <b>Similarity = 93.75%</b>
