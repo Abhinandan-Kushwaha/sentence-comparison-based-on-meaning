@@ -67,3 +67,15 @@ td {
   border: 1px solid black;
   padding: 10px;
 }
+
+#comp {
+  display: none;
+}
+
+#tableButton {
+  display: none;
+}
+
+#similarityTable {
+  display: none;
+}
