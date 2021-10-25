@@ -79,3 +79,10 @@ td {
 #similarityTable {
   display: none;
 }
+
+.gitLogo {
+  position: absolute;
+  right: 12px;
+  top: 16px;
+  cursor: pointer;
+}
