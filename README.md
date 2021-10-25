@@ -36,7 +36,7 @@ for each token t1 in s1, do{
 }
 ```
 <br/>
-6. This generates a table of similarities between the tokens in taken from the 2 sentences<br>
+6. This generates a table of similarities between the tokens taken from the 2 sentences<br>
 7. Now find the highest sum of similarities from the table, such that no two similarity values come from the same row or same column<br/>
 <table>
     <tr>
